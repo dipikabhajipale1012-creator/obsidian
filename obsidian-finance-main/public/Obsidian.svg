@@ -1,0 +1,27 @@
+<svg width="400" height="400" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background (Remove this rect line if you want a fully transparent PNG background) -->
+  <rect width="400" height="400" fill="#0F172A"/>
+
+  <!-- Obsidian Gem/Finance Symbol -->
+  <path d="M 200 60 L 320 160 L 200 300 L 80 160 Z" fill="url(#glassGrad)" />
+  
+  <!-- Left Facet -->
+  <path d="M 200 60 L 200 300 L 80 160 Z" fill="#10B981" opacity="0.5"/>
+  
+  <!-- Right Facet -->
+  <path d="M 200 60 L 320 160 L 200 300 Z" fill="#34D399" opacity="0.8"/>
+  
+  <!-- Center Highlight -->
+  <path d="M 200 120 L 260 160 L 200 240 L 140 160 Z" fill="#FFFFFF" opacity="0.15"/>
+
+  <!-- App Name Text -->
+  <text x="200" y="360" font-family="'Inter', -apple-system, sans-serif" font-size="32" font-weight="800" fill="#F8FAFC" text-anchor="middle" letter-spacing="4">OBSIDIAN</text>
+  
+  <defs>
+    <!-- Glassmorphic Gradient -->
+    <linearGradient id="glassGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#34D399" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#047857" stop-opacity="0.3"/>
+    </linearGradient>
+  </defs>
+</svg>
