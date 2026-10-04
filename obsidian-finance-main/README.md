@@ -1,154 +1,200 @@
-# Obsidian Finance
+# Obsidian Finance – Expense Tracker
 
-Build a polished, professional Expense Tracker web app — a personal finance dashboard for tracking income and expenses, with a minimalist black-and-white design system and smooth, deliberate motion throughout.
+A modern, responsive personal finance dashboard built to simplify income and expense management. Obsidian Finance provides a clean, minimalist interface to track transactions, monitor balances, and understand spending habits.
 
-## Design Direction
+## 🚀 Features
 
-Minimalist monochrome finance app. Think: a premium black-and-white banking app, not a colorful dashboard. High contrast, lots of whitespace, confident typography doing the heavy lifting instead of color or decoration.
+- **Dashboard Overview:** View your balance, total income, total expenses, and net change in one place.
+- **Transaction Management:** Add, edit, and delete income and expense transactions.
+- **Category Tracking:** Organize transactions into categories such as Food, Transport, Education, Shopping, Bills, and more.
+- **Interactive Charts:** Visualize expense distribution with clean, minimal charts.
+- **Search and Filters:** Quickly find transactions by description, category, type, or selected period.
+- **Light and Dark Mode:** Switch between elegant light and dark themes.
+- **Responsive Design:** Optimized for desktop, tablet, and mobile devices.
+- **Animated Statistics:** Smooth number transitions and subtle interface animations.
+- **Data Persistence:** Manage transactions through a structured data layer designed for future backend integration.
 
-Colors:
+## 🛠️ Tech Stack
 
-- Background: #FFFFFF (light mode) / #0A0A0A (dark mode)
+- **Frontend:** React.js, TypeScript
+- **Styling:** CSS / Tailwind CSS
+- **Charts:** Chart.js
+- **Icons:** Lucide Icons
+- **State Management:** React Context and Hooks
+- **Data Handling:** Local state with a modular API structure
+- **Development Tools:** Node.js, npm, Vite
 
-- Surface/cards: #FFFFFF with a hairline border #E5E5E5 (light) / #1A1A1A with border #2A2A2A (dark)
+## 📂 Project Structure
 
-- Primary text: #111111 (light) / #F5F5F5 (dark)
-
-- Muted text: #6B6B6B (light) / #A1A1A1 (dark)
-
-- Accent (use sparingly — only for income/expense signal, never for decoration): Income #16A34A, Expense #DC2626. These should appear only as: a small icon tint, a thin left-border on transaction rows, and the amount text color. Everything else (buttons, nav, cards, borders) stays black/white/gray.
-
-- Primary action button: solid black (light mode) / solid white (dark mode) — high contrast, no gradients, no shadows beyond a subtle 1px border or barely-there elevation
-
-Typography: Inter or similar. Numbers (amounts, balance) should be a slightly heavier weight than body text to establish hierarchy — this is a finance app, the numbers are the product.
-
-Include a light/dark mode toggle in the header — this theme should look equally sharp in both.
-
-## Motion & Animation (important — make this feel premium, not static)
-
-- Page/section transitions: fade + slight upward slide (8-12px) on mount, ~200-250ms ease-out
-
-- Stat cards (Balance, Income, Expenses, Net Change): animate the numbers counting up from 0 on load/update, not just snapping to the new value
-
-- Transaction list: new items slide in from the top with a brief highlight flash; deleted items slide out and collapse height smoothly rather than disappearing instantly
-
-- Buttons: subtle scale-down (0.97) on press, spring back on release
-
-- Cards: gentle lift (translateY -2px + soft shadow increase) on hover, desktop only
-
-- Drawer/modal (add/edit transaction): slide in from the right with a backdrop fade, not an abrupt pop
-
-- Chart: bars/segments animate in (grow from baseline) on first render
-
-- Toggle between light/dark mode: smooth color-transition across the whole page (~300ms), not an instant flash
-
-- Keep all animations quick and purposeful — nothing should feel slow or delay the user from acting. No bouncy/playful easing; use ease-out or ease-in-out curves that feel controlled and premium.
-
-## Layout
-
-- Desktop: header + summary cards row + two-column main area (transaction list on the left/larger, chart + category breakdown on the right/sidebar)
-
-- Mobile (360px+): everything stacks vertically — summary cards in a horizontal scroll or 2x2 grid, chart below transactions
-
-- Header: app name/logo (left), period selector dropdown (This Month / Last Month / All Time), light/dark toggle, "Add Transaction" button (solid black/white, right-aligned)
-
-## Summary Cards (top of dashboard)
-
-Four cards: Balance, Total Income, Total Expenses, Net Change — each with a small icon, label, and the animated count-up number. Balance should be visually the largest/most prominent of the four.
-
-## Transaction List
-
-Each row: category icon (monochrome icon, small colored dot/tint matching income or expense), description, date, category label, amount (right-aligned, colored per income/expense, bold), edit and delete icon buttons that appear on hover (desktop) or are always visible (mobile).
-
-## Add/Edit Transaction
-
-Right-side slide-in drawer. Toggle switch for Income/Expense at the top (this should visually restyle the drawer's accent subtly — not repaint it, just a small indicator shift). Fields: Amount (large, prominent input), Category (dropdown, searchable), Date (date picker), Note (optional textarea). Save button disabled + spinner while submitting. Inline validation under invalid fields.
-
-## Charts & Category Breakdown
-
-A clean category breakdown — either a minimal donut/bar chart or a ranked list of categories with thin horizontal bars, all in grayscale except for subtle length/value differentiation. Only expense transactions count toward this. Use Chart.js via CDN, styled to match the monochrome theme (no default chart colors — override to grays with maybe one accent).
-
-## Search & Filters
-
-Search bar (title/category, live filter). Filter chips for Type (Income/Expense) and Category — active chips shown in solid black/white, inactive as outlined. Month/period selector in the header drives the whole dashboard.
-
-## Empty & Error States
-
-Centered icon (line-style, monochrome) + short message + CTA button when there's no data or no filter results. Graceful retry state if data "fetching" fails.
-
-## Feedback
-
-Toast notifications (top-right, minimal style — dark toast on light mode, light toast on dark mode) for create/edit/delete/errors. Confirmation dialog before delete, styled to match (not a jarring browser-default popup).
-
-## Data Model (use this exact shape in local state)
-
-```ts
-
-interface Transaction {
-
-  id: string;
-
-  type: "INCOME" | "EXPENSE";
-
-  amount: number;
-
-  category: string;
-
-  description: string;
-
-  date: string; // ISO date
-
-  createdAt: string;
-
-  updatedAt: string;
-
-}
-
+```text
+obsidian-finance/
+│
+├── public/
+│   └── assets/
+│
+├── src/
+│   ├── components/
+│   │   ├── Dashboard/
+│   │   ├── Transactions/
+│   │   ├── Charts/
+│   │   └── UI/
+│   │
+│   ├── context/
+│   │   └── TransactionContext.tsx
+│   │
+│   ├── lib/
+│   │   └── api.ts
+│   │
+│   ├── pages/
+│   │   └── Dashboard.tsx
+│   │
+│   ├── App.tsx
+│   ├── main.tsx
+│   └── index.css
+│
+├── package.json
+├── index.html
+└── README.md
 ```
 
-Categories: Food, Transport, Education, Shopping, Bills, Entertainment, Health, Salary, Freelance, Other.
+*Note: This is a suggested structure. The actual folders and filenames may differ depending on your implementation.*
 
-## Calculations
+## ⚙️ Getting Started
 
-- Balance = total income − total expenses
+Follow these steps to run the project locally.
 
-- Net Change = income − expenses for the selected period only
+### Prerequisites
 
-- Category breakdown includes only EXPENSE transactions
+Make sure the following tools are installed:
 
-## Initial State
+- [Node.js](https://nodejs.org/)
+- npm
+- Visual Studio Code (recommended)
 
-Seed with 10 realistic transactions (mix of income and expense across several categories and dates, at least one from last month) so the dashboard and chart are populated immediately.
+### Installation
 
-## Architecture Notes for Lovable
+**1. Clone the repository**
 
-- Keep all data access in a single `lib/api.ts` file with functions like `getTransactions()`, `createTransaction()`, `updateTransaction()`, `deleteTransaction()`, `getSummary()`, `getCategoryBreakdown()` — implement against local React state for now, structured so they can later be swapped for real fetch calls to a REST backend (`/api/transactions`, `/api/transactions/{id}`, `/api/transactions/summary`, `/api/transactions/categories`)
+```bash
+git clone <your-repository-url>
+```
 
-- Shared state/context for transactions, filters, and selected period so all views stay in sync
+**2. Navigate to the project folder**
 
-- Fully responsive from 360px up
+```bash
+cd obsidian-finance
+```
 
-- Accessible: never convey income/expense by color alone — always pair with a +/- sign or icon; visible keyboard focus states; proper form labels
+**3. Install dependencies**
 
-Priority order: get the full add → view → edit → delete → totals-update loop working correctly first. Then layer in the animation polish — don't let motion get in the way of the core flow working end-to-end.
+```bash
+npm install
+```
 
-This project was built with [Lovable](https://lovable.dev).
+**4. Start the development server**
 
-## Build with Lovable
-
-Continue developing this project in the [Lovable editor](https://lovable.dev/projects/2bd104df-c305-4244-b308-5e2c741e42d7).
-
-- **Ship faster**: describe what you want to build and Lovable handles the code.
-- **Stay in sync**: every change made in Lovable is committed straight to this repository.
-- **Full ownership**: this code is yours. Push to `main` on GitHub and your changes sync back into Lovable, ready for your next prompt.
-
-## Development
-
-Prefer working locally? You need Node.js and npm — [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating).
-
-```sh
-git clone <this-repository-url>
-cd <repository-name>
-npm i
+```bash
 npm run dev
 ```
+
+**5. Open the application**
+
+Open the local URL displayed in your terminal, usually:
+
+```text
+http://localhost:5173
+```
+
+## 💰 How It Works
+
+### 1. Dashboard
+
+The dashboard displays four important financial metrics:
+
+- **Balance:** Total income minus total expenses.
+- **Total Income:** All recorded income.
+- **Total Expenses:** All recorded expenses.
+- **Net Change:** Income minus expenses for the selected period.
+
+### 2. Manage Transactions
+
+Users can:
+- Add new income or expense entries.
+- Update existing transaction details.
+- Delete transactions after confirmation.
+- View transaction dates, descriptions, categories, and amounts.
+
+### 3. Expense Analysis
+
+The application groups expense transactions by category and displays a visual breakdown to help users understand their spending patterns.
+
+### 4. Search and Filters
+
+Users can search transactions and filter them by transaction type, category, and time period.
+
+## 📊 Transaction Data Model
+
+Each transaction follows this structure:
+
+```typescript
+interface Transaction {
+  id: string;
+  type: "INCOME" | "EXPENSE";
+  amount: number;
+  category: string;
+  description: string;
+  date: string;
+  createdAt: string;
+  updatedAt: string;
+}
+```
+
+### Available Categories
+
+- Food
+- Transport
+- Education
+- Shopping
+- Bills
+- Entertainment
+- Health
+- Salary
+- Freelance
+- Other
+
+## 🎨 Design Philosophy
+
+Obsidian Finance follows a minimalist black-and-white design approach.
+
+- High-contrast interface with generous whitespace.
+- Clean typography and clear financial data hierarchy.
+- Subtle animations and smooth transitions.
+- Consistent light and dark themes.
+- Responsive layouts for different screen sizes.
+
+## 🔮 Future Enhancements
+
+- Backend integration with REST APIs.
+- Database storage for persistent financial records.
+- User authentication and secure personal accounts.
+- Monthly and yearly financial reports.
+- Budget planning and spending limits.
+- Export transactions to CSV and PDF.
+- Recurring transaction support.
+- Advanced financial analytics.
+
+## 👩‍💻 Author
+
+**Dipika Bhajipale**
+
+Computer Science Engineering Student  
+Aspiring Web Developer
+
+## 📄 License
+
+This project is intended for educational and personal portfolio purposes. A formal open-source license can be added when the project is ready for public distribution.
+
+---
+
+**Obsidian Finance**  
+*Track smarter. Spend wiser. Stay in control.*
